@@ -1,10 +1,35 @@
 # pyTsetlinMachine
 
+## Description
+
 Implementation of the Tsetlin Machine (https://arxiv.org/abs/1804.01508), Convolutional Tsetlin Machine (https://arxiv.org/abs/1905.09688), Regression Tsetlin Machine (https://arxiv.org/abs/1905.04206, https://royalsocietypublishing.org/doi/full/10.1098/rsta.2019.0165, https://link.springer.com/chapter/10.1007/978-3-030-30244-3_23), Weighted Tsetlin Machines (https://arxiv.org/abs/1911.12607, https://ieeexplore.ieee.org/document/9316190, https://arxiv.org/abs/2002.01245), and Embedding Tsetlin Machine, with support for continuous features (https://arxiv.org/abs/1905.04199, https://link.springer.com/chapter/10.1007%2F978-3-030-22999-3_49), multigranular clauses (https://arxiv.org/abs/1909.07310, https://link.springer.com/chapter/10.1007/978-3-030-34885-4_11), and clause indexing (https://arxiv.org/abs/2004.03188, https://link.springer.com/chapter/10.1007/978-3-030-55789-8_60).
 
 <p align="center">
   <img width="75%" src="https://github.com/olegranmo/blob/blob/master/Weighted_Tsetlin_Machine_Example_Configuration_Full.png">
 </p>
+
+## Contents
+
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Multi-threading](#multi-threading)
+- [Tutorials](#tutorials)
+- [Examples](#examples)
+  - [Multiclass Demo](#multiclass-demo)
+  - [Interpretability Demo](#interpretability-demo)
+  - [2D Convolution Demo](#2d-convolution-demo)
+  - [Continuous Input Demo](#continuous-input-demo)
+  - [MNIST Demo](#mnist-demo)
+  - [MNIST Demo w/Weighted Clauses](#mnist-demo-wweighted-clauses)
+  - [MNIST 2D Convolution Demo w/Weighted Clauses](#mnist-2d-convolution-demo-wweighted-clauses)
+  - [Fashion MNIST 2D Convolution Demo w/Weighted Clauses](#fashion-mnist-2d-convolution-demo-wweighted-clauses)
+  - [IMDb Text Categorization Demo](#imdb-text-categorization-demo)
+  - [Regression Demo](#regression-demo)
+- [Further Work](#further-work)
+- [Requirements](#requirements)
+- [Acknowledgements](#acknowledgements)
+- [Tsetlin Machine Papers](#tsetlin-machine-papers)
+- [Licence](#licence)
 
 ## Installation
 
@@ -28,8 +53,7 @@ Convolutional Tsetlin Machine tutorial, https://github.com/cair/convolutional-ts
 
 ### Multiclass Demo
 
-#### Code: NoisyXORDemo.py
-
+<font size=4>**Code: NoisyXORDemo.py**</font>
 ```python
 from pyTsetlinMachine.tm import MultiClassTsetlinMachine
 import numpy as np 
@@ -54,7 +78,7 @@ print("Prediction: x1 = 0, x2 = 0, ... -> y = %d" % (tm.predict(np.array([[0,0,1
 print("Prediction: x1 = 1, x2 = 1, ... -> y = %d" % (tm.predict(np.array([[1,1,1,0,1,0,1,1,1,1,0,0]]))))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
 python3 ./NoisyXORDemo.py 
@@ -69,7 +93,7 @@ Prediction: x1 = 1, x2 = 1, ... -> y = 0
 
 ### Interpretability Demo
 
-#### Code: InterpretabilityDemo.py
+<font size=4>**Code: InterpretabilityDemo.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassTsetlinMachine
@@ -140,7 +164,7 @@ for j in range(1, 10, 2):
 	print(" ∧ ".join(l))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
 python3 ./InterpretabilityDemo.py
@@ -182,7 +206,7 @@ Clause #9:   x0 ∧  x1
 
 ### 2D Convolution Demo
 
-#### Code: 2DNoisyXORDemo.py
+<font size=4>**Code: 2DNoisyXORDemo.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassConvolutionalTsetlinMachine2D
@@ -212,7 +236,7 @@ print(Xi)
 print("\nPrediction: %d" % (ctm.predict(Xi)))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
 python3 ./2DNoisyXORDemo.py 
@@ -231,7 +255,7 @@ Prediction: 1
 
 ### Continuous Input Demo
 
-#### Code: BreastCancerDemo.py
+<font size=4>**Code: BreastCancerDemo.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassTsetlinMachine
@@ -260,10 +284,10 @@ for i in range(100):
 	tm_results = np.append(tm_results, np.array(100*(tm.predict(X_test) == Y_test).mean()))
 	print("#%d Average Accuracy: %.2f%% +/- %.2f" % (i+1, tm_results.mean(), 1.96*tm_results.std()/np.sqrt(i+1)))
 ```
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
-python3 ./BreastCancerDemo.py 
+python3 ./BreastCancerDemo.py
 
 Mean accuracy over 100 runs:
 
@@ -276,7 +300,7 @@ Mean accuracy over 100 runs:
 
 ### MNIST Demo
 
-#### Code: MNISTDemo.py
+<font size=4>**Code: MNISTDemo.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassTsetlinMachine
@@ -287,8 +311,8 @@ from keras.datasets import mnist
 
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 
-X_train = np.where(X_train.reshape((X_train.shape[0], 28*28)) > 75, 1, 0) 
-X_test = np.where(X_test.reshape((X_test.shape[0], 28*28)) > 75, 1, 0) 
+X_train = np.where(X_train.reshape((X_train.shape[0], 28*28)) > 75, 1, 0)
+X_test = np.where(X_test.reshape((X_test.shape[0], 28*28)) > 75, 1, 0)
 
 tm = MultiClassTsetlinMachine(2000, 50, 10.0)
 
@@ -305,10 +329,10 @@ for i in range(250):
 	print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
-python3 ./MNISTDemo.py 
+python3 ./MNISTDemo.py
 
 Accuracy over 250 epochs:
 
@@ -321,9 +345,10 @@ Accuracy over 250 epochs:
 #249 Accuracy: 97.98% Training: 7.74s Testing: 3.10s
 #250 Accuracy: 98.07% Training: 7.92s Testing: 3.12s
 ```
+
 ### MNIST Demo w/Weighted Clauses
 
-#### Code: MNISTDemoWeightedClauses.py
+<font size=4>**Code: MNISTDemoWeightedClauses.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassTsetlinMachine
@@ -334,8 +359,8 @@ from keras.datasets import mnist
 
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 
-X_train = np.where(X_train.reshape((X_train.shape[0], 28*28)) > 75, 1, 0) 
-X_test = np.where(X_test.reshape((X_test.shape[0], 28*28)) > 75, 1, 0) 
+X_train = np.where(X_train.reshape((X_train.shape[0], 28*28)) > 75, 1, 0)
+X_test = np.where(X_test.reshape((X_test.shape[0], 28*28)) > 75, 1, 0)
 
 tm = MultiClassTsetlinMachine(2000, 50*100, 10.0, weighted_clauses=True)
 
@@ -352,7 +377,7 @@ for i in range(60):
         print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
 python3 ./MNISTDemoWeightedClauses.py
@@ -371,7 +396,7 @@ Accuracy over 60 epochs:
 
 ### MNIST 2D Convolution Demo w/Weighted Clauses
 
-#### Code: MNISTDemo2DConvolutionWeightedClauses.py
+<font size=4>**Code: MNISTDemo2DConvolutionWeightedClauses.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassConvolutionalTsetlinMachine2D
@@ -382,8 +407,8 @@ from keras.datasets import mnist
 
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
 
-X_train = np.where(X_train >= 75, 1, 0) 
-X_test = np.where(X_test >= 75, 1, 0) 
+X_train = np.where(X_train >= 75, 1, 0)
+X_test = np.where(X_test >= 75, 1, 0)
 
 tm = MultiClassConvolutionalTsetlinMachine2D(2000, 50*100, 5.0, (10, 10), weighted_clauses=True)
 
@@ -398,10 +423,10 @@ for i in range(30):
 	print("#%d Accuracy: %.2f%% (%.2fs)" % (i+1, result, stop-start))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
-python3 ./MNISTDemo2DConvolutionWeightedClauses.py 
+python3 ./MNISTDemo2DConvolutionWeightedClauses.py
 
 Accuracy over 30 epochs:
 
@@ -414,9 +439,10 @@ Accuracy over 30 epochs:
 #29 Accuracy: 99.21% (546.38s)
 #30 Accuracy: 99.16% (538.87s)
 ```
+
 ### Fashion MNIST 2D Convolution Demo w/Weighted Clauses
 
-#### Code: FashionMNISTDemo2DConvolutionWeightedClauses.py
+<font size=4>**Code: FashionMNISTDemo2DConvolutionWeightedClauses.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import MultiClassConvolutionalTsetlinMachine2D
@@ -448,10 +474,10 @@ for i in range(30):
 	print("#%d Accuracy: %.2f%% (%.2fs)" % (i+1, result, stop-start))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
-python3 ./FashionMNISTDemo2DConvolutionWeightedClauses.py 
+python3 ./FashionMNISTDemo2DConvolutionWeightedClauses.py
 
 Accuracy over 30 epochs:
 
@@ -467,7 +493,7 @@ Accuracy over 30 epochs:
 
 ### IMDb Text Categorization Demo
 
-#### Code: IMDbTextCategorizationDemo.py
+<font size=4>**Code: IMDbTextCategorizationDemo.py**</font>
 
 ```python
 import numpy as np
@@ -481,7 +507,7 @@ from time import time
 MAX_NGRAM = 2
 
 NUM_WORDS=5000
-INDEX_FROM=2 
+INDEX_FROM=2
 
 FEATURES=5000
 
@@ -520,7 +546,7 @@ for i in range(train_y.shape[0]):
 			else:
 				vocabulary[phrase] = 1
 
-# Assign a bit position to each N-gram (minimum frequency 10) 
+# Assign a bit position to each N-gram (minimum frequency 10)
 
 phrase_bit_nr = {}
 bit_nr_phrase = {}
@@ -564,7 +590,7 @@ for i in range(test_y.shape[0]):
 		for gram in grams:
 			phrase = " ".join(gram)
 			if phrase in phrase_bit_nr:
-				X_test[i,phrase_bit_nr[phrase]] = 1				
+				X_test[i,phrase_bit_nr[phrase]] = 1
 
 	Y_test[i] = test_y[i]
 
@@ -592,7 +618,7 @@ for i in range(50):
 	print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
 ```
 
-#### Output:
+<font size=4>**Output:**</font>:
 
 ```bash
 python ./IMDbTextCategorizationDemo.py
@@ -615,7 +641,7 @@ Accuracy over 50 epochs:
 
 ### Regression Demo
 
-#### Code: RegressionDemo.py
+<font size=4>**Code: RegressionDemo.py**</font>
 
 ```python
 from pyTsetlinMachine.tm import RegressionTsetlinMachine
@@ -649,10 +675,10 @@ for i in range(25):
 	print("#%d RMSD: %.2f +/- %.2f (%.2fs)" % (i+1, tm_results.mean(), 1.96*tm_results.std()/np.sqrt(i+1), stop-start))
 ```
 
-#### Output
+<font size=4>**Output:**</font>
 
 ```bash
-python3 ./RegressionDemo.py 
+python3 ./RegressionDemo.py
 
 RMSD over 25 runs:
 
