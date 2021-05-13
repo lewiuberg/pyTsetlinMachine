@@ -618,7 +618,7 @@ for i in range(50):
 	print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
 ```
 
-<font size=4>**Output:**</font>:
+<font size=4>**Output:**</font>
 
 ```bash
 python ./IMDbTextCategorizationDemo.py
