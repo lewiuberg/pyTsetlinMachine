@@ -11,26 +11,27 @@ Implementation of the Tsetlin Machine (https://arxiv.org/abs/1804.01508), Convol
 
 ## Contents
 
-- [Installation](#installation)
-- [Documentation](#documentation)
-- [Multi-threading](#multi-threading)
-- [Tutorials](#tutorials)
-- [Examples](#examples)
-  - [Multiclass Demo](#multiclass-demo)
-  - [Interpretability Demo](#interpretability-demo)
-  - [2D Convolution Demo](#2d-convolution-demo)
-  - [Continuous Input Demo](#continuous-input-demo)
-  - [MNIST Demo](#mnist-demo)
-  - [MNIST Demo w/Weighted Clauses](#mnist-demo-wweighted-clauses)
-  - [MNIST 2D Convolution Demo w/Weighted Clauses](#mnist-2d-convolution-demo-wweighted-clauses)
-  - [Fashion MNIST 2D Convolution Demo w/Weighted Clauses](#fashion-mnist-2d-convolution-demo-wweighted-clauses)
-  - [IMDb Text Categorization Demo](#imdb-text-categorization-demo)
-  - [Regression Demo](#regression-demo)
-- [Further Work](#further-work)
-- [Requirements](#requirements)
-- [Acknowledgements](#acknowledgements)
-- [Tsetlin Machine Papers](#tsetlin-machine-papers)
-- [Licence](#licence)
+- [pyTsetlinMachine](#pytsetlinmachine)
+  - [Installation](#installation)
+  - [Documentation](#documentation)
+  - [Multi-threading](#multi-threading)
+  - [Tutorials](#tutorials)
+  - [Examples](#examples)
+    - [Multiclass Demo](#multiclass-demo)
+    - [Interpretability Demo](#interpretability-demo)
+    - [2D Convolution Demo](#2d-convolution-demo)
+    - [Continuous Input Demo](#continuous-input-demo)
+    - [MNIST Demo](#mnist-demo)
+    - [MNIST Demo w/Weighted Clauses](#mnist-demo-wweighted-clauses)
+    - [MNIST 2D Convolution Demo w/Weighted Clauses](#mnist-2d-convolution-demo-wweighted-clauses)
+    - [Fashion MNIST 2D Convolution Demo w/Weighted Clauses](#fashion-mnist-2d-convolution-demo-wweighted-clauses)
+    - [IMDb Text Categorization Demo](#imdb-text-categorization-demo)
+    - [Regression Demo](#regression-demo)
+  - [Further Work](#further-work)
+  - [Requirements](#requirements)
+  - [Acknowledgements](#acknowledgements)
+  - [Tsetlin Machine Papers](#tsetlin-machine-papers)
+  - [Licence](#licence)
 
 ## Installation
 
@@ -118,51 +119,51 @@ print("Accuracy:", 100*(tm.predict(X_test) == Y_test).mean())
 
 print("\nClass 0 Positive Clauses:\n")
 for j in range(0, 10, 2):
-	print("Clause #%d: " % (j), end=' ')
-	l = []
-	for k in range(number_of_features*2):
-		if tm.ta_action(0, j, k) == 1:
-			if k < number_of_features:
-				l.append(" x%d" % (k))
-			else:
-				l.append("¬x%d" % (k-number_of_features))
-	print(" ∧ ".join(l))
+    print("Clause #%d: " % (j), end=' ')
+    l = []
+    for k in range(number_of_features*2):
+        if tm.ta_action(0, j, k) == 1:
+            if k < number_of_features:
+                l.append(" x%d" % (k))
+            else:
+                l.append("¬x%d" % (k-number_of_features))
+    print(" ∧ ".join(l))
 
 print("\nClass 0 Negative Clauses:\n")
 for j in range(1, 10, 2):
-	print("Clause #%d: " % (j), end=' ')
-	l = []
-	for k in range(number_of_features*2):
-		if tm.ta_action(0, j, k) == 1:
-			if k < number_of_features:
-				l.append(" x%d" % (k))
-			else:
-				l.append("¬x%d" % (k-number_of_features))
-	print(" ∧ ".join(l))
+    print("Clause #%d: " % (j), end=' ')
+    l = []
+    for k in range(number_of_features*2):
+        if tm.ta_action(0, j, k) == 1:
+            if k < number_of_features:
+                l.append(" x%d" % (k))
+            else:
+                l.append("¬x%d" % (k-number_of_features))
+    print(" ∧ ".join(l))
 
 print("\nClass 1 Positive Clauses:\n")
 for j in range(0, 10, 2):
-	print("Clause #%d: " % (j), end=' ')
-	l = []
-	for k in range(number_of_features*2):
-		if tm.ta_action(1, j, k) == 1:
-			if k < number_of_features:
-				l.append(" x%d" % (k))
-			else:
-				l.append("¬x%d" % (k-number_of_features))
-	print(" ∧ ".join(l))
+    print("Clause #%d: " % (j), end=' ')
+    l = []
+    for k in range(number_of_features*2):
+        if tm.ta_action(1, j, k) == 1:
+            if k < number_of_features:
+                l.append(" x%d" % (k))
+            else:
+                l.append("¬x%d" % (k-number_of_features))
+    print(" ∧ ".join(l))
 
 print("\nClass 1 Negative Clauses:\n")
 for j in range(1, 10, 2):
-	print("Clause #%d: " % (j), end=' ')
-	l = []
-	for k in range(number_of_features*2):
-		if tm.ta_action(1, j, k) == 1:
-			if k < number_of_features:
-				l.append(" x%d" % (k))
-			else:
-				l.append("¬x%d" % (k-number_of_features))
-	print(" ∧ ".join(l))
+    print("Clause #%d: " % (j), end=' ')
+    l = []
+    for k in range(number_of_features*2):
+        if tm.ta_action(1, j, k) == 1:
+            if k < number_of_features:
+                l.append(" x%d" % (k))
+            else:
+                l.append("¬x%d" % (k-number_of_features))
+    print(" ∧ ".join(l))
 ```
 
 <font size=4>**Output:**</font>
@@ -228,9 +229,9 @@ ctm.fit(X_train, Y_train, epochs=5000)
 print("Accuracy:", 100*(ctm.predict(X_test) == Y_test).mean())
 
 Xi = np.array([[[0,1,1,0],
-		[1,1,0,1],
-		[1,0,1,1],
-		[0,0,0,1]]])
+        [1,1,0,1],
+        [1,0,1,1],
+        [0,0,0,1]]])
 
 print("\nInput Image:\n")
 print(Xi)
@@ -279,11 +280,11 @@ tm = MultiClassTsetlinMachine(800, 40, 5.0)
 print("\nMean accuracy over 100 runs:\n")
 tm_results = np.empty(0)
 for i in range(100):
-	X_train, X_test, Y_train, Y_test = train_test_split(X_transformed, Y, test_size=0.2)
+    X_train, X_test, Y_train, Y_test = train_test_split(X_transformed, Y, test_size=0.2)
 
-	tm.fit(X_train, Y_train, epochs=25)
-	tm_results = np.append(tm_results, np.array(100*(tm.predict(X_test) == Y_test).mean()))
-	print("#%d Average Accuracy: %.2f%% +/- %.2f" % (i+1, tm_results.mean(), 1.96*tm_results.std()/np.sqrt(i+1)))
+    tm.fit(X_train, Y_train, epochs=25)
+    tm_results = np.append(tm_results, np.array(100*(tm.predict(X_test) == Y_test).mean()))
+    print("#%d Average Accuracy: %.2f%% +/- %.2f" % (i+1, tm_results.mean(), 1.96*tm_results.std()/np.sqrt(i+1)))
 ```
 <font size=4>**Output:**</font>
 
@@ -319,15 +320,15 @@ tm = MultiClassTsetlinMachine(2000, 50, 10.0)
 
 print("\nAccuracy over 250 epochs:\n")
 for i in range(250):
-	start_training = time()
-	tm.fit(X_train, Y_train, epochs=1, incremental=True)
-	stop_training = time()
+    start_training = time()
+    tm.fit(X_train, Y_train, epochs=1, incremental=True)
+    stop_training = time()
 
-	start_testing = time()
-	result = 100*(tm.predict(X_test) == Y_test).mean()
-	stop_testing = time()
+    start_testing = time()
+    result = 100*(tm.predict(X_test) == Y_test).mean()
+    stop_testing = time()
 
-	print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
+    print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
 ```
 
 <font size=4>**Output:**</font>
@@ -415,13 +416,13 @@ tm = MultiClassConvolutionalTsetlinMachine2D(2000, 50*100, 5.0, (10, 10), weight
 
 print("\nAccuracy over 30 epochs:\n")
 for i in range(30):
-	start = time()
-	tm.fit(X_train, Y_train, epochs=1, incremental=True)
-	stop = time()
-	
-	result = 100*(tm.predict(X_test) == Y_test).mean()
-	
-	print("#%d Accuracy: %.2f%% (%.2fs)" % (i+1, result, stop-start))
+    start = time()
+    tm.fit(X_train, Y_train, epochs=1, incremental=True)
+    stop = time()
+    
+    result = 100*(tm.predict(X_test) == Y_test).mean()
+    
+    print("#%d Accuracy: %.2f%% (%.2fs)" % (i+1, result, stop-start))
 ```
 
 <font size=4>**Output:**</font>
@@ -457,22 +458,22 @@ X_train = np.copy(X_train)
 X_test = np.copy(X_test)
 
 for i in range(X_train.shape[0]):
-	X_train[i,:] = cv2.adaptiveThreshold(X_train[i], 1, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+    X_train[i,:] = cv2.adaptiveThreshold(X_train[i], 1, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
 for i in range(X_test.shape[0]):
-	X_test[i,:] = cv2.adaptiveThreshold(X_test[i], 1, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+    X_test[i,:] = cv2.adaptiveThreshold(X_test[i], 1, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
 tm = MultiClassConvolutionalTsetlinMachine2D(2000, 50*100, 5.0, (10, 10), weighted_clauses=True)
 
 print("\nAccuracy over 30 epochs:\n")
 for i in range(30):
-	start = time()
-	tm.fit(X_train, Y_train, epochs=1, incremental=True)
-	stop = time()
-	
-	result = 100*(tm.predict(X_test) == Y_test).mean()
-	
-	print("#%d Accuracy: %.2f%% (%.2fs)" % (i+1, result, stop-start))
+    start = time()
+    tm.fit(X_train, Y_train, epochs=1, incremental=True)
+    stop = time()
+    
+    result = 100*(tm.predict(X_test) == Y_test).mean()
+    
+    print("#%d Accuracy: %.2f%% (%.2fs)" % (i+1, result, stop-start))
 ```
 
 <font size=4>**Output:**</font>
@@ -533,19 +534,19 @@ id_to_word = {value:key for key,value in word_to_id.items()}
 
 vocabulary = {}
 for i in range(train_y.shape[0]):
-	terms = []
-	for word_id in train_x[i]:
-		terms.append(id_to_word[word_id])
-	
-	for N in range(1,MAX_NGRAM+1):
-		grams = [terms[j:j+N] for j in range(len(terms)-N+1)]
-		for gram in grams:
-			phrase = " ".join(gram)
-			
-			if phrase in vocabulary:
-				vocabulary[phrase] += 1
-			else:
-				vocabulary[phrase] = 1
+    terms = []
+    for word_id in train_x[i]:
+        terms.append(id_to_word[word_id])
+    
+    for N in range(1,MAX_NGRAM+1):
+        grams = [terms[j:j+N] for j in range(len(terms)-N+1)]
+        for gram in grams:
+            phrase = " ".join(gram)
+            
+            if phrase in vocabulary:
+                vocabulary[phrase] += 1
+            else:
+                vocabulary[phrase] = 1
 
 # Assign a bit position to each N-gram (minimum frequency 10)
 
@@ -553,47 +554,47 @@ phrase_bit_nr = {}
 bit_nr_phrase = {}
 bit_nr = 0
 for phrase in vocabulary.keys():
-	if vocabulary[phrase] < 10:
-		continue
+    if vocabulary[phrase] < 10:
+        continue
 
-	phrase_bit_nr[phrase] = bit_nr
-	bit_nr_phrase[bit_nr] = phrase
-	bit_nr += 1
+    phrase_bit_nr[phrase] = bit_nr
+    bit_nr_phrase[bit_nr] = phrase
+    bit_nr += 1
 
 # Create bit representation
 
 X_train = np.zeros((train_y.shape[0], len(phrase_bit_nr)), dtype=np.uint32)
 Y_train = np.zeros(train_y.shape[0], dtype=np.uint32)
 for i in range(train_y.shape[0]):
-	terms = []
-	for word_id in train_x[i]:
-		terms.append(id_to_word[word_id])
+    terms = []
+    for word_id in train_x[i]:
+        terms.append(id_to_word[word_id])
 
-	for N in range(1,MAX_NGRAM+1):
-		grams = [terms[j:j+N] for j in range(len(terms)-N+1)]
-		for gram in grams:
-			phrase = " ".join(gram)
-			if phrase in phrase_bit_nr:
-				X_train[i,phrase_bit_nr[phrase]] = 1
+    for N in range(1,MAX_NGRAM+1):
+        grams = [terms[j:j+N] for j in range(len(terms)-N+1)]
+        for gram in grams:
+            phrase = " ".join(gram)
+            if phrase in phrase_bit_nr:
+                X_train[i,phrase_bit_nr[phrase]] = 1
 
-	Y_train[i] = train_y[i]
+    Y_train[i] = train_y[i]
 
 X_test = np.zeros((test_y.shape[0], len(phrase_bit_nr)), dtype=np.uint32)
 Y_test = np.zeros(test_y.shape[0], dtype=np.uint32)
 
 for i in range(test_y.shape[0]):
-	terms = []
-	for word_id in test_x[i]:
-		terms.append(id_to_word[word_id])
+    terms = []
+    for word_id in test_x[i]:
+        terms.append(id_to_word[word_id])
 
-	for N in range(1,MAX_NGRAM+1):
-		grams = [terms[j:j+N] for j in range(len(terms)-N+1)]
-		for gram in grams:
-			phrase = " ".join(gram)
-			if phrase in phrase_bit_nr:
-				X_test[i,phrase_bit_nr[phrase]] = 1
+    for N in range(1,MAX_NGRAM+1):
+        grams = [terms[j:j+N] for j in range(len(terms)-N+1)]
+        for gram in grams:
+            phrase = " ".join(gram)
+            if phrase in phrase_bit_nr:
+                X_test[i,phrase_bit_nr[phrase]] = 1
 
-	Y_test[i] = test_y[i]
+    Y_test[i] = test_y[i]
 
 print("Selecting features...")
 
@@ -608,15 +609,15 @@ tm = MultiClassTsetlinMachine(10000, 80, 5.0, weighted_clauses=True, clause_drop
 
 print("\nAccuracy over 40 epochs:\n")
 for i in range(40):
-	start_training = time()
-	tm.fit(X_train, Y_train, epochs=1, incremental=True)
-	stop_training = time()
+    start_training = time()
+    tm.fit(X_train, Y_train, epochs=1, incremental=True)
+    stop_training = time()
 
-	start_testing = time()
-	result = 100*(tm.predict(X_test) == Y_test).mean()
-	stop_testing = time()
+    start_testing = time()
+    result = 100*(tm.predict(X_test) == Y_test).mean()
+    stop_testing = time()
 
-	print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
+    print("#%d Accuracy: %.2f%% Training: %.2fs Testing: %.2fs" % (i+1, result, stop_training-start_training, stop_testing-start_testing))
 ```
 
 <font size=4>**Output:**</font>
@@ -666,14 +667,14 @@ tm = RegressionTsetlinMachine(1000, 500*10, 2.75, weighted_clauses=True)
 print("\nRMSD over 25 runs:\n")
 tm_results = np.empty(0)
 for i in range(25):
-	X_train, X_test, Y_train, Y_test = train_test_split(X_transformed, Y)
+    X_train, X_test, Y_train, Y_test = train_test_split(X_transformed, Y)
 
-	start = time()
-	tm.fit(X_train, Y_train, epochs=30)
-	stop = time()
-	tm_results = np.append(tm_results, np.sqrt(((tm.predict(X_test) - Y_test)**2).mean()))
+    start = time()
+    tm.fit(X_train, Y_train, epochs=30)
+    stop = time()
+    tm_results = np.append(tm_results, np.sqrt(((tm.predict(X_test) - Y_test)**2).mean()))
 
-	print("#%d RMSD: %.2f +/- %.2f (%.2fs)" % (i+1, tm_results.mean(), 1.96*tm_results.std()/np.sqrt(i+1), stop-start))
+    print("#%d RMSD: %.2f +/- %.2f (%.2fs)" % (i+1, tm_results.mean(), 1.96*tm_results.std()/np.sqrt(i+1), stop-start))
 ```
 
 <font size=4>**Output:**</font>
@@ -693,11 +694,11 @@ RMSD over 25 runs:
 
 ## Further Work
 
-* Multilayer Tsetlin Machine
-* Recurrent Tsetlin Machine
-* GPU support
-* Optimize convolution code
-* More extensive hyper-parameter search for the demos
+- Multilayer Tsetlin Machine
+- Recurrent Tsetlin Machine
+- GPU support
+- Optimize convolution code
+- More extensive hyper-parameter search for the demos
 
 ## Requirements
 
