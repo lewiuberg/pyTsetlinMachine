@@ -1,4 +1,5 @@
 # pyTsetlinMachine
+![License](https://img.shields.io/github/license/microsoft/interpret.svg?style=flat-square) ![Python Version](https://img.shields.io/pypi/pyversions/interpret.svg?style=flat-square) ![Maintenance](https://img.shields.io/maintenance/yes/2021?style=flat-square)
 
 ## Description
 
@@ -603,10 +604,10 @@ selected_features = SKB.get_support(indices=True)
 X_train = SKB.transform(X_train)
 X_test = SKB.transform(X_test)
 
-tm = MultiClassTsetlinMachine(10000, 80, 27.0)
+tm = MultiClassTsetlinMachine(10000, 80, 5.0, weighted_clauses=True, clause_drop_p=0.75)
 
-print("\nAccuracy over 50 epochs:\n")
-for i in range(50):
+print("\nAccuracy over 40 epochs:\n")
+for i in range(40):
 	start_training = time()
 	tm.fit(X_train, Y_train, epochs=1, incremental=True)
 	stop_training = time()
@@ -629,14 +630,14 @@ Selecting features...
 
 Accuracy over 50 epochs:
 
-#1 Accuracy: 86.84% Training: 947.15s Testing: 12.39s
-#2 Accuracy: 87.62% Training: 709.67s Testing: 11.34s
-#3 Accuracy: 88.05% Training: 631.41s Testing: 13.11s
+#1 Accuracy: 85.42% Training: 761.58s Testing: 9.16s
+#2 Accuracy: 86.56% Training: 667.68s Testing: 9.80s
+#3 Accuracy: 87.01% Training: 612.66s Testing: 10.43s
 ...
 
-#48 Accuracy: 89.56% Training: 357.80s Testing: 9.59s
-#49 Accuracy: 89.50% Training: 354.74s Testing: 9.58s
-#50 Accuracy: 89.45% Training: 371.62s Testing: 9.67s
+#38 Accuracy: 89.81% Training: 286.38s Testing: 11.58s
+#39 Accuracy: 89.75% Training: 282.54s Testing: 11.85s
+#40 Accuracy: 89.76% Training: 278.88s Testing: 11.70s
 ```
 
 ### Regression Demo
@@ -711,12 +712,48 @@ I thank my colleagues from the Centre for Artificial Intelligence Research (CAIR
 ## Tsetlin Machine Papers
 
 ```bash
-@InProceedings{abeyrathna2020parallel,
+@article{zhang2021convergence,
+  title = {On the {{Convergence}} of {{Tsetlin Machines}} for the {{IDENTITY}}- and {{NOT Operators}}},
+  author = {Zhang, Xuan and Jiao, Lei and Granmo, Ole-Christoffer and Goodwin, Morten},
+  year = {2021},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence}
+}
+```
+
+```bash
+@InProceedings{abeyrathna2021parallel,
   title="{Massively Parallel and Asynchronous Tsetlin Machine Architecture Supporting Almost Constant-Time Scaling}",
   author={K. Darshana Abeyrathna and Bimal Bhattarai and Morten Goodwin and Saeed Gorji and Ole-Christoffer Granmo and Lei Jiao and Rupsa Saha and Rohan K. Yadav},
   booktitle={The Thirty-eighth International Conference on Machine Learning (ICML 2021)},
   year={2021},
   organization={ICML}
+}
+```
+
+```bash
+@article{sharma2021dropclause,
+  title="{Human Interpretable AI: Enhancing Tsetlin Machine Stochasticity with Drop Clause}",
+  author={Jivitesh Sharma and Rohan Yadav and Ole-Christoffer Granmo and Lei Jiao},
+  journal = {arXiv preprint arXiv:2105.14506}, year = {2021},
+  url = {https://arxiv.org/abs/2105.14506}
+}
+```
+
+```bash
+@article{bhattarai2021fakenews,
+  title="{Explainable Tsetlin Machine framework for fake news detection with credibility score assessment}",
+  author={Bimal Bhattarai and Ole-Christoffer Granmo and Lei Jiao},
+  journal = {arXiv preprint arXiv:2105.09114}, year = {2021},
+  url = {https://arxiv.org/abs/2105.09114}
+}
+```
+
+```bash
+@article{bhattarai2021wordlevel,
+  title="{Word-level Human Interpretable Scoring Mechanism for Novel Text Detection Using Tsetlin Machines}",
+  author={Bimal Bhattarai and Ole-Christoffer Granmo and Lei Jiao},
+  journal = {arXiv preprint arXiv:2105.04708}, year = {2021},
+  url = {https://arxiv.org/abs/2105.04708}
 }
 ```
 
@@ -902,15 +939,6 @@ I thank my colleagues from the Centre for Artificial Intelligence Research (CAIR
   author={K. Darshana Abeyrathna and Ole-Christoffer Granmo and Rishad Shafik and Alex Yakovlev and Adrian Wheeldon and Jie Lei and Morten Goodwin},
   booktitle="Lecture Notes in Computer Science: Proceedings of the 40th International Conference on Innovative Techniques and Applications of Artificial Intelligence (SGAI-2020)", year="2020",
   publisher="Springer International Publishing"
-}
-```
-
-```bash
-@article{zhang2020convergence,
-  title="{On the Convergence of Tsetlin Machines for the IDENTITY- and NOT Operators}",
-  author={Xuan Zhang and Lei Jiao and Ole-Christoffer Granmo and Morten Goodwin},
-  journal = {arXiv preprint arXiv:2007.14268}, year = {2020},
-  url = {https://arxiv.org/abs/2007.14268}
 }
 ```
 
